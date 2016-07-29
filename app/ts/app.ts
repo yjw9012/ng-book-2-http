@@ -13,6 +13,11 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { SimpleHTTPComponent } from 'components/SimpleHTTPComponent';
 
 /*
+ * Injectables
+ */
+import { youtubeServiceInjectables } from "components/YouTubeSearchComponent";
+
+/*
  * Webpack
  */
 require('css/styles.scss');
@@ -33,5 +38,5 @@ class HttpApp {
 }
 
 bootstrap(HttpApp, [
-  HTTP_PROVIDERS
+  HTTP_PROVIDERS,  youtubeServiceInjectables
 ]);
