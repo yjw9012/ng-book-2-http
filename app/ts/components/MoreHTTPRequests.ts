@@ -1,6 +1,11 @@
-import {Component, Injectable, Inject, bind, OnInit, ElementRef, EventEmitter} from "@angular/core";
-import {Http, Response} from "@angular/http";
-import {JsonPipe, CORE_DIRECTIVES} from "@angular/common";
+import { Component } from '@angular/core';
+import { JsonPipe, CORE_DIRECTIVES } from '@angular/common';
+import {
+    Http,
+    Response,
+    RequestOptions,
+    Headers
+} from '@angular/http';
 
 @Component({
     selector: "more-http",
@@ -23,7 +28,18 @@ export class MoreHTTPRequests {
     constructor(public http: Http) {}
 
     makePost(): void {
-
+        this.loading = true;
+        this.http.post(
+            'http://jsonplaceholder.typicode.com/posts',
+            JSON.stringify({
+                body: 'bar',
+                title: 'foo',
+                userId: 1
+            })
+        ).subscribe((res: Response) => {
+            this.data = res.json();
+            this.loading = false;
+        });
     }
 
     makeDelete(): void {
@@ -32,10 +48,21 @@ export class MoreHTTPRequests {
             .subscribe((res: Response) => {
                 this.data = res.json();
                 this.loading = false;
-            })
+            });
     }
 
     makeHeaders(): void {
+        let headers: Headers = new Headers();
+        headers.append('X-API-TOKEN', 'ng-book');
 
+        let opts: RequestOptions = new RequestOptions();
+        opts.headers = headers;
+
+        this.loading = true;
+        this.http.get('http://jsonplaceholder.typicode.com/posts/1', opts)
+            .subscribe((res: Response) => {
+                this.data = res.json();
+                this.loading = false;
+            });
     }
 }
