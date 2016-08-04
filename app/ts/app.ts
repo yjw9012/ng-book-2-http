@@ -11,6 +11,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
  * Components
  */
 import { SimpleHTTPComponent } from 'components/SimpleHTTPComponent';
+import { YouTubeSearchComponent } from 'components/YouTubeSearchComponent';
 
 /*
  * Injectables
@@ -25,11 +26,12 @@ require('css/styles.scss');
 @Component({
     selector: 'http-app',
     directives: [
-        SimpleHTTPComponent
+        SimpleHTTPComponent, YouTubeSearchComponent
     ],
     template: `
         <div class="container">
             <simple-http></simple-http>
+            <youtube-search></youtube-search>
         </div>
     `
 })
